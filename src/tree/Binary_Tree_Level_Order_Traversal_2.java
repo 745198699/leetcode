@@ -1,13 +1,14 @@
 package tree;
-import tree.TreeNode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
-
-public class Binary_Tree_Level_Order_Traversal {
+public class Binary_Tree_Level_Order_Traversal_2 {
 	
-	public List<List<Integer>> levelOrder(TreeNode root) {
-		List<List<Integer>> results = new ArrayList<List<Integer>>();
+    public List<List<Integer>> levelOrderBottom_BFS(TreeNode root) {
+    	List<List<Integer>> results = new ArrayList<List<Integer>>();
 		if(root==null){
 			return results;
 		}
@@ -27,14 +28,12 @@ public class Binary_Tree_Level_Order_Traversal {
 				if(curNode.right!=null)
 					q.offer(curNode.right);
 			}
-			results.add(list);
+			results.add(0,list);
 		}
 	    return results;
-	}
 	
-	
-	
-	public List<List<Integer>> levelOrder2(TreeNode root) {
+    }
+    public List<List<Integer>> levelOrderBottom_DFS(TreeNode root) {
 		List<List<Integer>> results = new ArrayList<List<Integer>>();
 		if(root==null){
 			return results;
@@ -46,21 +45,23 @@ public class Binary_Tree_Level_Order_Traversal {
 	
 	private void level(TreeNode root, List<List<Integer>> results,int level){
 		if(results.size()<level){
-			results.add(new ArrayList<Integer>());
+			results.add(0,new ArrayList<Integer>());
 		}
-		results.get(level-1).add(root.val);
+		results.get(results.size()-level).add(root.val);
 		if(root.left!=null)
 			level(root.left,results,level+1);
 		if(root.right!=null)
 			level(root.right,results,level+1);
 	}
-
 	public static void main(String[] args) {
+
 		TreeNode root = new TreeNode(1);
 		root.left = new TreeNode(2);
-		root.right = new TreeNode(4);
-		root.left.left = new TreeNode(3);
-		System.out.println(new Binary_Tree_Level_Order_Traversal().levelOrder(root));
+		root.right = new TreeNode(3);
+		root.left.left = new TreeNode(4);
+		root.left.right = new TreeNode(5);
+		System.out.println(new Binary_Tree_Level_Order_Traversal_2().levelOrderBottom_DFS(root));
+	
 	}
 
 }
