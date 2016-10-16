@@ -6,7 +6,6 @@ public class Balanced_Binary_Tree {
 		if(root==null){
 			return true;
 		}
-		
 		return getDepth_better(root)==-1;
 	}
 	public int getDepth_better(TreeNode node){
