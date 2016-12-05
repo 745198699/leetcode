@@ -21,11 +21,11 @@ public class Guess_Number_Higher_or_Lower_II {
     private int f(int dp[][], int i, int j){
     	if(dp[i][j]!=0)
     		return dp[i][j];
-    	if(i<=j)
+    	if(i>=j)
     		return 0;
     	int min=Integer.MAX_VALUE;
     	for(int index=i;index<=j;index++){
-    		int temp = index+f(dp,i,index-1)+f(dp,index+1,j);
+    		int temp = index+Math.max(f(dp,i,index-1), f(dp,index+1,j));
     		min = Math.min(temp, min);
     	}
     	dp[i][j]=min;
